@@ -1,0 +1,9 @@
+{
+  "name": "qlcc-test",
+  "version": "1.0.0",
+  "description": "Run automation test for qlcc website",
+  "main": "app.js",
+  "repository": "https://github.com/tmquang0209/qlcc-test.git",
+  "author": "Trần Minh Quang <tmquang0209@gmail.com>",
+  "license": "MIT"
+}
