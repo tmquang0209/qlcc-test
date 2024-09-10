@@ -146,6 +146,11 @@ describe("Role", () => {
             await expect(securePage.notification).toBeExisting();
             await expect(securePage.notification).toHaveText(expect.stringContaining("Cập nhật quyền thành công!"));
         });
+
+        // it("Select to disable checkbox", async () => {
+        //     await rolePage.permissionRoleBtn("Giảng viên");
+        //     await rolePage.setPermissionForRole(false);
+        // });
     });
 
     describe("Delete role", () => {

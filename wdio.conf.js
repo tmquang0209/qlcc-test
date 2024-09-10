@@ -217,8 +217,15 @@ exports.config = {
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
      */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
-    // },
+    afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
+        if (!passed) {
+            const { browserName, browserVersion } = browser.capabilities;
+            console.log(`Hook ${hookName} failed on ${browserName}, version ${browserVersion}`);
+            const currentDate = new Date();
+            const fileName = hookName + "_" + browserName + "_v." + browserVersion;
+            browser.saveScreenshot(`./hookImages/${fileName}.png`);
+        }
+    },
     /**
      * Function to be executed after a test (in Mocha/Jasmine only)
      * @param {object}  test             test object

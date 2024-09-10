@@ -126,10 +126,10 @@ class RolePage extends Page {
         await permissionBtn.click();
     }
 
-    async setPermissionForRole() {
+    async setPermissionForRole(disable = false) {
         const element = $("//td[text()='Cài đặt chung']").nextElement().nextElement();
         // get td 3rd element
-        const permission = element.$("input[type='checkbox']");
+        const permission = disable ? element.$("input[type='checkbox']") : element.$("input[type='checkbox'][disabled]");
         await permission.click();
 
         await $("button[type='submit']").click();
