@@ -25,6 +25,7 @@ class LoginPage extends Page {
      * e.g. to login using username and password
      */
     async login(username, password) {
+        // this.open();
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
@@ -39,13 +40,13 @@ class LoginPage extends Page {
                 break;
 
             case "teacher":
-                username = "ngocnt";
-                password = "1";
+                username = "Tranh";
+                password = "123456@";
                 break;
 
             case "academicAffairs":
-                username = "ngocbekute";
-                password = "1";
+                username = "ngangth";
+                password = "123456@";
                 break;
 
             default:
@@ -60,7 +61,7 @@ class LoginPage extends Page {
     /**
      * overwrite specific options to adapt it to page object
      */
-    open() {
+    async open() {
         return super.open("admin/login");
     }
 }

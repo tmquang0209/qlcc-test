@@ -1,4 +1,4 @@
-const { expect } = require("@wdio/globals");
+const { expect, browser } = require("@wdio/globals");
 const LoginPage = require("../pageobjects/login.page");
 const SecurePage = require("../pageobjects/secure.page");
 
@@ -19,4 +19,8 @@ describe("My Login application", () => {
         await expect(SecurePage.notification).toBeExisting();
         await expect(SecurePage.notification).toHaveText(expect.stringContaining("Đăng nhập thất bại"));
     });
+
+    it("logout", async()=>{
+        await browser
+    })
 });

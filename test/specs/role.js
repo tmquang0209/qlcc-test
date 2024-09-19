@@ -2,6 +2,7 @@ const loginPage = require("../pageobjects/login.page");
 const rolePage = require("../pageobjects/role.page");
 const securePage = require("../pageobjects/secure.page");
 const { browser } = require("@wdio/globals");
+const settingPage = require("../pageobjects/setting.page");
 
 describe("Role", () => {
     beforeEach(async () => {
@@ -141,10 +142,29 @@ describe("Role", () => {
     describe("It will update permissions for role", () => {
         it("Set permissions for role", async () => {
             await rolePage.permissionRoleBtn("Giảng viên");
-            await rolePage.setPermissionForRole();
+            const checked = await rolePage.setPermissionForRole();
 
-            await expect(securePage.notification).toBeExisting();
-            await expect(securePage.notification).toHaveText(expect.stringContaining("Cập nhật quyền thành công!"));
+            // await expect(securePage.notification).toBeExisting();
+            // await expect(securePage.notification).toHaveText(expect.stringContaining("Cập nhật quyền thành công!"));
+            await browser.pause(1000);
+            await browser.saveScreenshot("./screenshots/[Update permission] Set permissions for role.png");
+
+            // logout and login again to check permission
+            await browser.deleteAllCookies();
+            await browser.refresh();
+            // await securePage.delete();
+            await loginPage.loginByRole("teacher");
+            await browser.pause(1000);
+
+            await settingPage.open();
+            if (checked) {
+                await expect(settingPage.teachingScheduleInput).toBeExisting();
+                // saveBtn is not existing
+                await expect(settingPage.saveBtn).not.toBeExisting();
+            } else {
+                await expect(securePage.notHaveAccess).toBeExisting();
+                await expect(securePage.notHaveAccess).toHaveText(expect.stringContaining("Bạn không có quyền truy cập"));
+            }
         });
 
         // it("Select to disable checkbox", async () => {
